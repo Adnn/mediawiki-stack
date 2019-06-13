@@ -1,0 +1,44 @@
+# MediaWiki with MySQL
+#
+# Access via "http://localhost:8080"
+version: '3'
+services:
+  mediawiki:
+    image: adnn/mediawiki
+    deploy:
+      restart_policy:
+        condition: on-failure
+    ports:
+      - 8080:80
+    volumes:
+      - mediawiki_images:/var/www/html/images
+      - ./docker-entrypoint.d:/docker-entrypoint.d
+      - ./backups:/mediawiki_backups
+    environment:
+      MYSQL_DATABASE: mediawiki
+      MYSQL_USER: mediawiki
+      MYSQL_PASSWORD:
+      MYSQL_ROOT_PASSWORD:
+      WIKI_NAME: wiki
+      WIKI_USER: admin 
+      WIKI_PASSWORD:
+      WIKI_DB_PREFIX:
+      WIKI_DOMAIN:
+    depends_on:
+      - database
+  database:
+    image: mysql:5.7 # Note: Does NOT work with 8
+    deploy:
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      # @see https://phabricator.wikimedia.org/source/mediawiki/browse/master/includes/DefaultSettings.php
+      MYSQL_DATABASE: mediawiki
+      MYSQL_USER: mediawiki
+      MYSQL_PASSWORD:
+      MYSQL_ROOT_PASSWORD:
+volumes:
+  mediawiki_images:
+  mysql_data:
