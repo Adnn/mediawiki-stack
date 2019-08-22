@@ -8,8 +8,6 @@ services:
     deploy:
       restart_policy:
         condition: on-failure
-    ports:
-      - 8080:80
     volumes:
       - mediawiki_images:/var/www/html/images
       - ./docker-entrypoint.d:/docker-entrypoint.d

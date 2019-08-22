@@ -1,3 +1,6 @@
+#!/bin/bash
+set -e
+
 FILE="LocalSettings.php"
 if [ ! -f  ${FILE} ]; then
     php maintenance/install.php \
