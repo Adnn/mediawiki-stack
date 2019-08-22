@@ -13,21 +13,23 @@ Deploy the swarm
 
     [env VAR=VALUE ... see table below] docker stack deploy -c mediawiki.yml mediawiki
 
-|environment variable   |default      |
-|-----------------------|-------------|
-| MYSQL_DATABASE        | mediawiki   |
-| MYSQL_USER            | mediawiki   |
-| MYSQL_PASSWORD        |             |
-| MYSQL_ROOT_PASSWORD   |             |
-| WIKI_NAME             | wiki        |
-| WIKI_USER             | admin       |
-| WIKI_PASSWORD         |             |
-| WIKI_DB_PREFIX        |             |
-| WIKI_DOMAIN           |             |
+|environment variable   |default         |
+|-----------------------|----------------|
+| MYSQL_DATABASE        | mediawiki      |
+| MYSQL_USER            | mediawiki      |
+| MYSQL_PASSWORD        |                |
+| MYSQL_ROOT_PASSWORD   |                |
+| WIKI_NAME             | wiki           |
+| WIKI_USER             | admin          |
+| WIKI_PASSWORD         |                |
+| WIKI_DB_PREFIX        |                |
+| WIKI_DOMAIN           |                |
+| BACKUP_FOLDER         | ./backups      |
 
 ### Backups
 
-The container links /mediawiki_backups to ./backups on the host, to allow exchange of backup archives.
+The container links /mediawiki_backups to ${BACKUP_FOLDER} on the host, to allow exchange of backup archives.
+When using custom ${BACKUP_FOLDER}, ensure the folder exists prior to running.
 
 Making a backup, then available in ./backups on the host:
 

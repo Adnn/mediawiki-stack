@@ -13,7 +13,7 @@ services:
     volumes:
       - mediawiki_images:/var/www/html/images
       - ./docker-entrypoint.d:/docker-entrypoint.d
-      - ./backups:/mediawiki_backups
+      - ${BACKUP_FOLDER:-./backups}:/mediawiki_backups
     environment:
       MYSQL_DATABASE: mediawiki
       MYSQL_USER: mediawiki
